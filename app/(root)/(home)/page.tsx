@@ -1,11 +1,25 @@
+"use client";
 import MeetingTypeList from "@/components/MeetingTypeList";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
+  // Chat GPT Code :
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update current time every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
   const now = new Date();
   const time = now.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    // second: "2-digit",
   });
 
   const date = new Intl.DateTimeFormat("en-US", {
